@@ -1,12 +1,6 @@
-# My Navigation Package
+# my_navigation
 
-This ROS Noetic package implements autonomous indoor navigation for a TurtleBot3 (Burger) robot within a simulated bookstore environment. The robot navigates sequentially to predefined target stations, utilizing AMCL for localization and `move_base` for path planning.
-
----
-
-## 📂 Package Structure
-
-The package is structured strictly according to the project requirements:
+## Project Structure
 
 ```text
 my_navigation/
@@ -16,10 +10,10 @@ my_navigation/
 ├── config/
 │   └── mission.yaml          # Target coordinates (YAML)
 ├── launch/
-│   ├── simülasyon.launch     # Starts Gazebo bookstore environment
+│   ├── simulation.launch     # Starts Gazebo bookstore environment
 │   ├── slam.launch           # Template placeholder for SLAM mapping
 │   ├── navigation.launch     # Starts map_server, AMCL, and move_base
-│   └── task_manager.launch   # Loads params and triggers autonomous execution
+│   └── task_manager.launch   # Loads parameters and triggers autonomous execution
 ├── maps/
 │   ├── map.pgm               # Occupancy grid map image
 │   └── map.yaml              # Map metadata configuration
@@ -28,25 +22,55 @@ my_navigation/
 └── src/
     ├── qr_reader_node.py     # Odometry tracking / verification node
     └── task_manager_node.py  # Actionlib navigation client node
-Execution Instructions
-To run the complete autonomous simulation, open three separate terminal windows, resource your workspace (source devel/setup.bash), and execute the following commands in order:
+```
 
-1. Launch the Simulation Environment
-Spins up Gazebo, loads the bookstore layout, and spawns the TurtleBot3 Burger model.
+---
 
-Bash
+## Execution Instructions
+
+To run the complete autonomous navigation simulation, open **three separate terminal windows**, source your workspace in each terminal, and execute the following commands in order:
+
+```bash
+source devel/setup.bash
+```
+
+### 1. Launch the Simulation Environment
+
+Starts Gazebo, loads the bookstore environment, and spawns the TurtleBot3 Burger model.
+
+```bash
 export TURTLEBOT3_MODEL=burger
-roslaunch my_navigation simülasyon.launch
+roslaunch my_navigation simulation.launch
+```
 
-2. Launch Navigation stack
-Loads the map server with the static bookstore map, initializes AMCL localization layers, and configures global/local costmaps for path planning.
+### 2. Launch the Navigation Stack
 
-Bash
+Loads the static bookstore map, initializes AMCL localization, and configures the global and local costmaps used for path planning.
+
+```bash
 roslaunch my_navigation navigation.launch
-Note: Use the 2D Pose Estimate tool in RViz if the initial laser scans need synchronization with the map walls.
+```
 
-3. Launch the Task Manager Sequence
-Loads the waypoint parameters from mission.yaml to the ROS parameter server and triggers the navigation client node to drive through all designated targets.
+> **Note:** If the robot's laser scans are not properly aligned with the map, use the **2D Pose Estimate** tool in RViz to initialize localization.
 
-Bash
+### 3. Launch the Task Manager
+
+Loads waypoint parameters from `mission.yaml` into the ROS parameter server and starts the navigation client responsible for visiting all target locations.
+
+```bash
 roslaunch my_navigation task_manager.launch
+```
+
+---
+
+## Overview
+
+This package provides an autonomous navigation workflow for a TurtleBot3 operating in a bookstore environment. The system combines:
+
+* Gazebo simulation
+* AMCL-based localization
+* ROS Navigation Stack (`move_base`)
+* YAML-configured mission waypoints
+* Actionlib-based task execution
+
+The robot autonomously navigates through predefined target locations specified in `config/mission.yaml`.
