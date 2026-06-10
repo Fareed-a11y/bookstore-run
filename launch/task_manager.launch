@@ -1,0 +1,5 @@
+<launch>
+  <rosparam file="$(find my_navigation)/config/mission.yaml" command="load" />
+
+  <node pkg="my_navigation" type="task_manager_node.py" name="task_manager" output="screen" />
+</launch>

@@ -1,0 +1,5 @@
+stations:
+   INFO_DESK:      [-0.6, 4.12, 90]
+   SCIENCE_SECTION:  [ 7.09,  0.52,   0]
+   NOVEL_SECTION:    [ -1.84, -6.4, -90]
+   CHECKOUT:      [-5.49, -3.78,  90]

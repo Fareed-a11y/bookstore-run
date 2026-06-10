@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+    <arg name="map_file" value="$(find my_navigation)/maps/bookstore_map.yaml"/>
+  </include>
+</launch>
