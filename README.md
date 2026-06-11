@@ -51,7 +51,7 @@ Loads the static bookstore map, initializes AMCL localization, and configures th
 roslaunch my_navigation navigation.launch
 ```
 
-> **Note:** If the robot's laser scans are not properly aligned with the map, use the **2D Pose Estimate** tool in RViz to initialize localization.
+> **Note:** If the robot's laser scans are not properly aligned with the map, use the **2D Pose Estimate** tool in RViz to initialize localization, or kill the rviz and relaunch navigation.
 
 ### 3. Launch the Task Manager
 
